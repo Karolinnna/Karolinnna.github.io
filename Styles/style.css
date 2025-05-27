@@ -9,15 +9,46 @@
 }
 
 body {
-  min-height: 100vh;
-  font-family: Kufam, sans-serif;
+  min-height: 100vh; /*100% від поточної висоти вікна перегляду*/
+  font-family: Kufam;
   color: aliceblue;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
 
-.main_body{
+.form {
+    max-width: 450px; /* Приклад, можете налаштувати */
+    margin: 50px auto; /* Центрує форму по горизонталі */
+    padding: 30px; /* Додайте внутрішній відступ для форми */
+    background-color: #0c0c0c; /* Темний фон для форми */
+    border-radius: 8px;
+    margin-bottom: 50px; 
+}
+
+.form .form-control {
+    width: 100%; /* Займає 100% доступної ширини батьківського контейнера (який є .form-group) */
+    max-width: 300px; /* Обмеження максимальної ширини */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.label {
+    text-align: center;
+    display: block;
+    color: aliceblue;
+    margin: 5px;
+}
+
+.form .btn {
+    display: block;
+    margin: 30px auto 0; 
+    color: aliceblue;
+}
+
+
+.main_body {
   background: url(../Photo/main_background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,184 +56,32 @@ body {
   background-attachment: fixed;
 }
 
-*{
+.reg_body {
+  background: #0c0c0c;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+* {
   text-decoration: none;
+  box-sizing: border-box; /*змушує width та height елемента включати його відступи (padding) та рамку (border), що значно спрощує розрахунки розмірів і макетування.*/
 }
 
 .main_header {
-  background-color: black;
+  background-color: #0c0c0c;
   height: 100px;
   width: 100%;
-  position: sticky; 
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 100;
-}
-
-.main {
   display: flex;
-  gap: 10px;
-  padding: 20px;
-  height: 1000px;
-}
-
-.library {
-  background: linear-gradient(0deg,rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%);
-  min-width: 500px;
-  min-height: 1200px;
-  color: aliceblue;
-  padding: 10px;
-  border-radius: 5px;
-  position: relative;
-  margin-left: 10px;
-}
-
-.plibrary {
-  font-family: Kufam;
-  position: absolute;
-  margin-left: 20px;
-  font-size: 32px;
-}
-
-.buttonlibrary {
-  border-radius: 50%;
-  position: absolute;
-  color: aliceblue;
-  background-color: rgb(59, 59, 59);
-  height: 30px;
-  width: 30px;
-  right: 30px;
-  margin-top: 30px;
-}
-
-.divlibrary1, .divlibrary2 {
-  color: aliceblue;
-  width: 80%;
-  height: 200px;
-  background: linear-gradient(90deg,rgba(38, 38, 38, 1) 0%, rgba(43, 43, 43, 1) 50%, rgba(51, 51, 51, 1) 100%);
-  position: relative;
-  padding: 30px;
-  border-radius: 5px;
-  font-family: Kufam;
-}
-
-.divlibrary2 {
-  margin: 30px auto 0;
-}
-
-.divlibrary2 button, .divlibrary1 button{
-  padding: 10px 20px;
-  border: 2px solid #2c2c2c;
-  background-color: aliceblue;
-  color: rgb(41, 41, 41);
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 30px;
-  transition: all 0.4s ease;
-  outline: none;
-  position: relative;
-  overflow: hidden;
-  font-weight: bold;
-}
-
-.divlibrary2 button:hover, .divlibrary1 button:hover{
-  background-color: rgb(41, 41, 41);
-  color: aliceblue;
-  border-color: aliceblue;
-}
-
-.divlibrary1{
-  margin: 100px auto 0;
-}
-
-.spotify-footer {
-  background-color: #121212;
-  color: aliceblue;
-  font-family: 'Kufam', sans-serif;
-  font-size: 14px;
-  bottom: 0px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  padding: 48px 5%;
-}
-
-.footer-grid h4 {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.footer-grid ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-grid ul li {
-  margin-bottom: 10px;
-}
-
-.footer-grid ul li a {
-  text-decoration: none;
-  color: #b3b3b3;
-  transition: color 0.2s;
-}
-
-.footer-grid ul li a:hover {
-  color: aliceblue;
-}
-
-.bottom-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #333;
-  padding: 16px 5%;
-  font-size: 13px;
-  color: #b3b3b3;
-}
-
-.legal-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.copyright {
-  margin-top: 10px;
-}
-
-
-.recommend {
-  background: linear-gradient(0deg,rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%);
-  width: 80%;
-  height: 1200px;
-  color: aliceblue;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.precommend{
-  font-size: 32px;
-  font-family: Kufam;
-  margin-left: 20px;
-}
-
-footer {
-  background-color: black;
-  color: aliceblue;
-  text-align: center;
-  padding: 20px;
-  width: 100%;
-  height: 400px;
-  position: relative;
-  margin-top: 240px;
-  bottom: 0;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-bottom: 30px;
 }
 
 .main_logo {
@@ -210,25 +89,14 @@ footer {
   font-size: 40px;
   margin: 20px 108px;
   color: aliceblue;
-  position: absolute; 
-}
-
-a{
-  color: aliceblue;
-}
-
-.description {
-  color: aliceblue;
   position: absolute;
-  font-size: 60px;
-  font-family: Kufam;
-  top: 94px;
-  left: 102px;
-  animation: 3s anim-lineUp ease-out;
-  animation-iteration-count: 1;
 }
 
-.icon{
+a {
+  color: aliceblue;
+}
+
+.icon {
   width: 70px;
   height: 35px;
   background-color: rgb(41, 41, 41);
@@ -240,11 +108,24 @@ a{
   right: 50px;
 }
 
-.icon:hover{
+.iconUser{
+  width: 35px;
+  height: 35px; 
+  background-color: rgb(167, 61, 0);
+  color: aliceblue;
+  outline: 1px;
+  border-radius: 50%;
+  position: absolute;
+  top: 27px;
+  right: 50px;
+}
+
+
+.icon:hover {
   background-color: rgb(56, 56, 56);
 }
 
-.bell{
+.bell {
   width: 40px;
   height: 40px;
   background-color: rgb(41, 41, 41);
@@ -280,7 +161,7 @@ button:hover {
   position: absolute;
   top: 10px;
   left: 400px;
-  transform:  translate(-50%,50%);
+  transform: translate(-50%, 50%); /*переміщення елемента*/
   background: #1A1A1A;
   height: 40px;
   border-radius: 25px;
@@ -288,14 +169,14 @@ button:hover {
 
 }
 
-.searchBox:hover > .searchInput {
+.searchBox:hover>.searchInput {/* стилізує безпосередній дочірній елемент .searchInput лише тоді, коли курсор миші наведений на його батьківський елемент .searchBox*/
   width: 240px;
   padding: 0 6px;
 }
 
-.searchBox:hover > .searchButton {
-background: black;
-color : #1A1A1A;
+.searchBox:hover>.searchButton {
+  background: black;
+  color: #1A1A1A;
 }
 
 .searchButton {
@@ -306,16 +187,16 @@ color : #1A1A1A;
   border-radius: 50%;
   background: #1A1A1A;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /*центрування елементів вздовж головної(тут за замовчуванням горизонтальна) осі контейнера*/
+  align-items: center; /*центрування елементів вздовж поперечної осі контейнера*/
   transition: 0.4s;
 }
 
 .searchInput {
-  border:none;
+  border: none;
   background: none;
-  outline:none;
-  float:left;
+  outline: none;
+  float: left;
   padding: 0;
   color: white;
   font-size: 16px;
@@ -326,18 +207,187 @@ color : #1A1A1A;
 }
 
 @media screen and (max-width: 620px) {
-.searchBox:hover > .searchInput {
-  width: 150px;
-  padding: 0 6px;
-}
+  .searchBox:hover>.searchInput {
+    width: 150px;
+    padding: 0 6px;
+  }
 }
 
-/* gallery */
-.gallery{
+.main {
+  display: flex; /* тип відображення елемента (блоковий, рядковий, гнучкий, сітковий тощо) і впливає на те, як він взаємодіє з іншими елементами у макеті сторінки, в даному випадку Властивість flex дозволяє вказати параметри елемента, щоб він ефективно заповнював доступний простір. Елементи можуть бути розтягнуті пропорційно з урахуванням заданого співвідношення або стиснуті, щоб цілком вмістити всі елементи без переносів в один рядок.*/
+  gap: 10px;
+  padding: 20px;
+  height: 1000px; /* Змінено для адаптивності, буде перевизначено */
+}
+
+.library {
+  background: linear-gradient(0deg, rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%);
+  min-width: 500px;
+  min-height: 1350px;
+  color: aliceblue;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative; /*відносно цього елементу будуть розташовуватися елементи всередині нього*/
+  margin-left: 10px;
+}
+
+.plibrary {
+  font-family: Kufam;
+  position: absolute;
+  margin-left: 20px;
+  font-size: 32px;
+}
+
+.buttonlibrary {
+  border-radius: 50%;
+  position: absolute; /*розташування відносно батьківського елемента, а зміщення не впливає на інші елементи*/
+  color: aliceblue;
+  background-color: rgb(59, 59, 59);
+  height: 30px;
+  width: 30px;
+  right: 30px;
+  margin-top: 30px;
+}
+
+.divlibrary1,
+.divlibrary2 {
+  color: aliceblue;
+  width: 80%;
+  height: 200px;
+  background: linear-gradient(90deg, rgba(38, 38, 38, 1) 0%, rgba(43, 43, 43, 1) 50%, rgba(51, 51, 51, 1) 100%);
+  position: relative;
+  padding: 30px;
+  border-radius: 5px;
+  font-family: Kufam;
+}
+
+.divlibrary2 {
+  margin: 30px auto 0;
+}
+
+.divlibrary2 button,
+.divlibrary1 button {
+  padding: 10px 20px;
+  border: 2px solid #2c2c2c;
+  background-color: aliceblue;
+  color: rgb(41, 41, 41);
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.4s ease; /* анімація почнеться повільно, прискориться в середині, а потім знову сповільниться наприкінці*/
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.divlibrary2 button:hover,
+.divlibrary1 button:hover {
+  background-color: rgb(41, 41, 41);
+  color: aliceblue;
+  border-color: aliceblue;
+}
+
+.divlibrary1 {
+  margin: 100px auto 0;
+}
+
+.spotify-footer {
+  background-color: #121212;
+  color: aliceblue;
+  font-family: 'Kufam', sans-serif;
+  font-size: 14px;
+  bottom: 0px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /*створює 4 рівні за шириною стовпці у вашій Grid-сітці, де 1fr це скільки місця займає, тут (1/4)*/
+  gap: 40px;
+  padding: 48px 5%;
+}
+
+.footer-grid h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.footer-grid ul {
+  list-style: none; /*видалення маркера */
+  padding: 0;
+  margin: 0;
+}
+
+.footer-grid ul li {
+  margin-bottom: 10px;
+}
+
+.footer-grid ul li a {
+  text-decoration: none;
+  color: #b3b3b3;
+  transition: color 0.2s;
+}
+
+.footer-grid ul li a:hover {
+  color: aliceblue;
+}
+
+.bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /*розподіляє простір між елементами так, що перший прилипає до початку, останній — до кінця, а решта рівномірно розсуваються між ними.*/
+  align-items: center;
+  border-top: 1px solid #333;
+  padding: 16px 5%;
+  font-size: 13px;
+  color: #b3b3b3;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap; /*автоматично переноситися на нові рядки*/
+  gap: 16px;
+}
+
+.copyright {
+  margin-top: 10px;
+}
+
+
+.recommend {
+  background: linear-gradient(0deg, rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%);
+  width: 80%;
+  height: 1350px;
+  color: aliceblue;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.precommend {
+  font-size: 32px;
+  font-family: Kufam;
   margin-left: 20px;
 }
 
-div.gallery{
+footer {
+  background-color: black;
+  color: aliceblue;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  height: 400px;
+  position: relative;
+  margin-top: 400px;
+  bottom: 0;
+}
+
+/* gallery */
+.gallery {
+  margin-left: 20px;
+}
+
+div.gallery {
   border-radius: 5px;
 }
 
@@ -358,19 +408,250 @@ div.desc {
   text-align: center;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .responsive {
   padding: 0 6px;
   float: left;
-  width: 14%;
+  width: 19%;
+
 }
 
 
 .clearfix:after {
   content: "";
-  display: table;
-  clear: both;
+  display: table; /*він керує елементами так, ніби вони є частинами таблиці*/
+  clear: both; /*змушує елемент початися з нового рядка, розташовуючись нижче всіх попередніх обтікаючих (float) елементів*/
+}
+
+/* --- RESPONSIVENESS --- */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .main_header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 10px;
+    position: static; /* Відключити sticky на маленьких екранах */
+  }
+
+  .main_logo {
+    position: static;
+    margin: 10px auto;
+    font-size: 32px;
+  }
+
+  .searchBox {
+    position: static;
+    transform: none;
+    margin: 10px auto;
+    width: 90%;
+    left: auto;
+    top: auto;
+  }
+
+  .searchBox:hover>.searchInput {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .icon,
+  .bell {
+    position: static;
+    margin: 5px auto;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .library {
+    min-width: unset;
+    width: 100%;
+    min-height: auto;
+    margin-left: 0;
+  }
+
+  .plibrary {
+    position: static;
+    margin-left: 10px;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .buttonlibrary {
+    position: static;
+    margin: 10px auto;
+    right: auto;
+    top: auto;
+  }
+
+  .divlibrary1,
+  .divlibrary2 {
+    width: 95%;
+    height: auto;
+    padding: 20px;
+    margin: 20px auto 0;
+  }
+
+  .recommend {
+    width: 100%;
+    height: auto;
+  }
+
+  .precommend {
+    font-size: 28px;
+    margin-left: 10px;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 5%;
+  }
+
+  .bottom-links {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 5%;
+  }
+
+  .legal-links {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .copyright {
+    margin-top: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  footer {
+    height: auto;
+    margin-top: 20px; /* Зменшити відступ */
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .gallery {
+    margin-left: 10px;
+  }
+  .responsive {
+    width: 48%;
+    padding: 0 2%;
+    float: left;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 601px to 768px) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .main_header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 15px;
+  }
+
+  .main_logo {
+    position: static;
+    margin: 15px auto;
+    font-size: 36px;
+  }
+
+  .searchBox {
+    position: static;
+    transform: none;
+    margin: 10px auto;
+    width: 80%;
+    left: auto;
+    top: auto;
+  }
+
+  .icon,
+  .bell {
+    position: static;
+    margin: 8px auto;
+  }
+
+  .main {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+  }
+
+  .library,
+  .recommend {
+    min-width: unset;
+    width: 100%;
+    min-height: auto;
+    margin-left: 0;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 40px 5%;
+  }
+
+  .responsive {
+    width: 32%;
+  }
+}
+
+/* Medium devices (landscape tablets, 769px to 992px) */
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+  .main_header {
+    padding: 0 30px;
+  }
+
+  .main_logo {
+    font-size: 38px;
+    margin: 20px 50px;
+  }
+
+  .searchBox {
+    left: 300px;
+  }
+
+  .icon {
+    right: 30px;
+  }
+
+  .bell {
+    right: 100px;
+  }
+
+  .main {
+    flex-direction: row;
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .library {
+    min-width: 300px;
+    width: 40%;
+  }
+
+  .recommend {
+    width: 60%;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 40px 5%;
+  }
+
+  .responsive {
+    width: 24%;
+  }
+}
+
+/* Large devices (laptops/desktops, 993px and up) */
+@media only screen and (min-width: 993px) {
+
 }
