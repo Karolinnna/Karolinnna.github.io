@@ -1,0 +1,63 @@
+@use "../variables.sass"
+.spotify-footer
+  background-color: #121212
+  color: variables.$text-color
+  font-family: 'Kufam', sans-serif
+  font-size: 14px
+  bottom: 0px
+
+.footer-grid
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  gap: 40px
+  padding: 48px 5%
+
+  h4
+    font-size: 16px
+    font-weight: bold
+    margin-bottom: 16px
+
+  ul
+    list-style: none
+    padding: 0
+    margin: 0
+
+    li
+      margin-bottom: 10px
+
+      a
+        text-decoration: none
+        color: variables.$light-grey
+        transition: color 0.2s
+
+        &:hover
+          color: variables.$text-color
+
+.bottom-links
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  align-items: center
+  border-top: 1px solid #333
+  padding: 16px 5%
+  font-size: 13px
+  color: variables.$light-grey
+
+.legal-links
+  display: flex
+  flex-wrap: wrap
+  gap: 16px
+
+.copyright
+  margin-top: 10px
+
+footer
+  background-color: black
+  color: variables.$text-color
+  text-align: center
+  padding: 20px
+  width: 100%
+  height: 400px
+  position: relative
+  margin-top: 400px
+  bottom: 0

@@ -1,0 +1,153 @@
+@use "../variables.sass"
+@use "../mixin.sass"
+body
+  min-height: 100vh
+  font-family: Kufam
+  color: variables.$text-color
+  overflow-x: hidden
+  margin: 0
+  padding: 0
+
+*
+  text-decoration: none
+  box-sizing: border-box
+
+a
+  color: variables.$text-color
+
+button:hover
+  cursor: pointer
+
+.form
+  max-width: 450px
+  margin: 50px auto
+  padding: 30px
+  background-color: variables.$primary-bg-color
+  border-radius: 8px
+  margin-bottom: 50px
+
+  .form-control
+    width: 100%
+    max-width: 300px
+    margin-left: auto
+    margin-right: auto
+    display: block
+
+  .label
+    text-align: center
+    display: block
+    color: variables.$text-color
+    margin: 5px
+
+  .btn
+    display: block
+    margin: 30px auto 0
+    color: variables.$text-color
+
+.main_body
+  background: url(../Photo/main_background.jpg)
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  background-attachment: fixed
+
+.reg_body
+  background: variables.$primary-bg-color
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+  background-attachment: fixed
+
+.main
+  display: flex
+  gap: 10px
+  padding: 20px
+  height: 1000px
+
+.library
+  background: linear-gradient(0deg, rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%)
+  min-width: 500px
+  min-height: 1350px
+  color: variables.$text-color
+  padding: 10px
+  border-radius: 5px
+  position: relative
+  margin-left: 10px
+
+  .plibrary
+    font-family: Kufam
+    position: absolute
+    margin-left: 20px
+    font-size: 32px
+
+  .buttonlibrary
+    border-radius: 50%
+    position: absolute
+    color: variables.$text-color
+    background-color: rgb(59, 59, 59)
+    height: 30px
+    width: 30px
+    right: 30px
+    margin-top: 30px
+
+  .divlibrary1, .divlibrary2
+    color: variables.$text-color
+    width: 80%
+    height: 200px
+    background: linear-gradient(90deg, rgba(38, 38, 38, 1) 0%, rgba(43, 43, 43, 1) 50%, rgba(51, 51, 51, 1) 100%)
+    position: relative
+    padding: 30px
+    border-radius: 5px
+    font-family: Kufam
+
+    button
+      mixin+button-styles // Using the mixin with a plus sign
+
+  .divlibrary2
+    margin: 30px auto 0
+
+  .divlibrary1
+    margin: 100px auto 0
+
+.recommend
+  background: linear-gradient(0deg, rgba(18, 18, 18, 1) 16%, rgba(26, 26, 26, 1) 100%)
+  width: 80%
+  height: 1350px
+  color: variables.$text-color
+  padding: 10px
+  border-radius: 5px
+
+  .precommend
+    font-size: 32px
+    font-family: Kufam
+    margin-left: 20px
+
+.gallery
+  margin-left: 20px
+
+  &.gallery // This is to apply styles directly to .gallery if it's also a div.gallery
+    border-radius: 5px
+
+    &:hover
+      cursor: pointer
+      background-color: #2b2b2b
+
+    img
+      width: 100%
+      height: auto
+      border-radius: 5%
+      outline: 1px #1A1A1A solid
+
+div.desc
+  padding: 15px
+  text-align: center
+
+.responsive
+  padding: 0 6px
+  float: left
+  width: 19%
+
+.clearfix:after
+  content: ""
+  display: table
+  clear: both

@@ -1,0 +1,64 @@
+@use "../variables.sass"
+.main_header
+  background-color: variables.$primary-bg-color
+  height: 100px
+  width: 100%
+  position: sticky
+  top: 0
+  left: 0
+  z-index: 100
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 0 20px
+  margin-bottom: 30px
+
+.main_logo
+  font-family: Kristi
+  font-size: 40px
+  margin: 20px 108px
+  color: variables.$text-color
+  position: absolute
+
+.searchBox
+  position: absolute
+  top: 10px
+  left: 400px
+  transform: translate(-50%, 50%)
+  background: #1A1A1A
+  height: 40px
+  border-radius: 25px
+  padding: 7px
+
+  &:hover
+    .searchInput
+      width: 240px
+      padding: 0 6px
+
+    .searchButton
+      background: black
+      color: #1A1A1A
+
+.searchButton
+  color: black
+  float: right
+  width: 25px
+  height: 25px
+  border-radius: 50%
+  background: #1A1A1A
+  display: flex
+  justify-content: center
+  align-items: center
+  transition: variables.$transition-speed
+
+.searchInput
+  border: none
+  background: none
+  outline: none
+  float: left
+  padding: 0
+  color: white
+  font-size: 16px
+  transition: variables.$transition-speed
+  line-height: 25px
+  width: 0px
