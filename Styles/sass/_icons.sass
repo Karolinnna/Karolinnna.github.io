@@ -1,34 +1,36 @@
-@use "variables.sass"
 .icon
   width: 70px
   height: 35px
-  background-color: variables.$dark-grey
-  color: variables.$text-color
+  background-color: rgb(41, 41, 41)
+  color: aliceblue
   border: 1px grey solid
   border-radius: 3px
   position: absolute
   top: 27px
   right: 50px
 
-  &:hover
-    background-color: variables.$medium-grey
-
 .iconUser
   width: 35px
   height: 35px
   background-color: rgb(167, 61, 0)
-  color: variables.$text-color
+  color: aliceblue
   outline: 1px
   border-radius: 50%
   position: absolute
   top: 27px
   right: 50px
 
+.icon:hover
+  background-color: rgb(56, 56, 56)
+
 .bell
   width: 40px
   height: 40px
-  background-color: variables.$dark-grey
+  background-color: rgb(41, 41, 41)
   border-radius: 50%
   position: absolute
   top: 25px
   right: 150px
+
+button:hover
+  cursor: pointer

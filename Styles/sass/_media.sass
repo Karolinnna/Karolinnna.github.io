@@ -1,186 +1,235 @@
-// Extra small devices (phones, 600px and down)
-@media only screen and (max-width: 600px)
-  .main_header
+@media screen and (max-width: 620px)
+  .searchBox:hover > .searchInput
+    width: 150px
+    padding: 0 6px
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) 
+  .main_header 
     flex-direction: column
     height: auto
     padding: 10px
     gap: 10px
-    position: static
+    position: static /* Відключити sticky на маленьких екранах */
+  
 
-  .main_logo
+  .main_logo 
     position: static
     margin: 10px auto
     font-size: 32px
+  
 
-  .searchBox
+  .searchBox 
     position: static
     transform: none
     margin: 10px auto
     width: 90%
     left: auto
     top: auto
+  
 
-    &:hover > .searchInput
-      width: 100%
-      padding: 0 10px
+  .searchBox:hover>.searchInput 
+    width: 100%
+    padding: 0 10px
+  
 
-  .icon, .bell
+  .icon,
+  .bell 
     position: static
     margin: 5px auto
+  
 
-  .main
+  .main 
     flex-direction: column
     height: auto
     padding: 10px
     gap: 20px
+  
 
-  .library
+  .library 
     min-width: unset
     width: 100%
     min-height: auto
     margin-left: 0
+  
 
-    .plibrary
-      position: static
-      margin-left: 10px
-      font-size: 28px
-      text-align: center
+  .plibrary 
+    position: static
+    margin-left: 10px
+    font-size: 28px
+    text-align: center
+  
 
-    .buttonlibrary
-      position: static
-      margin: 10px auto
-      right: auto
-      top: auto
+  .buttonlibrary 
+    position: static
+    margin: 10px auto
+    right: auto
+    top: auto
+  
 
-    .divlibrary1, .divlibrary2
-      width: 95%
-      height: auto
-      padding: 20px
-      margin: 20px auto 0
+  .divlibrary1,
+  .divlibrary2 
+    width: 95%
+    height: auto
+    padding: 20px
+    margin: 20px auto 0
+  
 
-  .recommend
+  .recommend 
     width: 100%
     height: auto
+  
 
-    .precommend
-      font-size: 28px
-      margin-left: 10px
-      text-align: center
+  .precommend 
+    font-size: 28px
+    margin-left: 10px
+    text-align: center
+  
 
-  .footer-grid
+  .footer-grid 
     grid-template-columns: 1fr
     gap: 20px
     padding: 30px 5%
+  
 
-  .bottom-links
+  .bottom-links 
     flex-direction: column
     align-items: flex-start
     padding: 10px 5%
+  
 
-  .legal-links
+  .legal-links 
     flex-direction: column
     gap: 10px
     margin-bottom: 10px
+  
 
-  .copyright
+  .copyright 
     margin-top: 0
     text-align: center
     width: 100%
+  
 
-  footer
+  footer 
     height: auto
-    margin-top: 20px
+    margin-top: 20px /* Зменшити відступ */
     padding-top: 30px
     padding-bottom: 30px
+  
 
-  .gallery
+  .gallery 
     margin-left: 10px
-  .responsive
+  
+  .responsive 
     width: 48%
     padding: 0 2%
     float: left
+  
 
-// Small devices (portrait tablets and large phones, 601px to 768px)
-@media only screen and (min-width: 601px) and (max-width: 768px)
-  .main_header
+
+/* Small devices (portrait tablets and large phones, 601px to 768px) */
+@media only screen and (min-width: 601px) and (max-width: 768px) 
+  .main_header 
     flex-wrap: wrap
     height: auto
     padding: 15px
+  
 
-  .main_logo
+  .main_logo 
     position: static
     margin: 15px auto
     font-size: 36px
+  
 
-  .searchBox
+  .searchBox 
     position: static
     transform: none
     margin: 10px auto
     width: 80%
     left: auto
     top: auto
+  
 
-  .icon, .bell
+  .icon,
+  .bell 
     position: static
     margin: 8px auto
+  
 
-  .main
+  .main 
     flex-direction: column
     height: auto
     padding: 15px
+  
 
-  .library, .recommend
+  .library,
+  .recommend 
     min-width: unset
     width: 100%
     min-height: auto
     margin-left: 0
+  
 
-  .footer-grid
+  .footer-grid 
     grid-template-columns: repeat(2, 1fr)
     gap: 30px
     padding: 40px 5%
+  
 
-  .responsive
+  .responsive 
     width: 32%
+  
 
-// Medium devices (landscape tablets, 769px to 992px)
-@media only screen and (min-width: 769px) and (max-width: 992px)
-  .main_header
+
+/* Medium devices (landscape tablets, 769px to 992px) */
+@media only screen and (min-width: 769px) and (max-width: 992px) 
+  .main_header 
     padding: 0 30px
+  
 
-  .main_logo
+  .main_logo 
     font-size: 38px
     margin: 20px 50px
+  
 
-  .searchBox
+  .searchBox 
     left: 300px
+  
 
-  .icon
+  .icon 
     right: 30px
+  
 
-  .bell
+  .bell 
     right: 100px
+  
 
-  .main
+  .main 
     flex-direction: row
     padding: 15px
     gap: 15px
+  
 
-  .library
+  .library 
     min-width: 300px
     width: 40%
+  
 
-  .recommend
+  .recommend 
     width: 60%
+  
 
-  .footer-grid
+  .footer-grid 
     grid-template-columns: repeat(3, 1fr)
     gap: 30px
     padding: 40px 5%
+  
 
-  .responsive
+  .responsive 
     width: 24%
+  
 
-// Large devices (laptops/desktops, 993px and up)
-@media only screen and (min-width: 993px)
-  // Styles for large devices, as they are mostly the default
+
+/* Large devices (laptops/desktops, 993px and up) */
+@media only screen and (min-width: 993px) 
+

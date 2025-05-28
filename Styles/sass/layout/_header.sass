@@ -1,6 +1,5 @@
-@use "../variables.sass"
 .main_header
-  background-color: variables.$primary-bg-color
+  background-color: #0c0c0c
   height: 100px
   width: 100%
   position: sticky
@@ -17,21 +16,27 @@
   font-family: Kristi
   font-size: 40px
   margin: 20px 108px
-  color: variables.$text-color
+  color: aliceblue
   position: absolute
+
+a
+  color: aliceblue
 
 .searchBox
   position: absolute
   top: 10px
   left: 400px
   transform: translate(-50%, 50%)
+
+  /*переміщення елемента
   background: #1A1A1A
   height: 40px
   border-radius: 25px
   padding: 7px
 
-  &:hover
+  &:hover >
     .searchInput
+      /* стилізує безпосередній дочірній елемент .searchInput лише тоді, коли курсор миші наведений на його батьківський елемент .searchBox
       width: 240px
       padding: 0 6px
 
@@ -48,8 +53,12 @@
   background: #1A1A1A
   display: flex
   justify-content: center
+
+  /*центрування елементів вздовж головної(тут за замовчуванням горизонтальна) осі контейнера
   align-items: center
-  transition: variables.$transition-speed
+
+  /*центрування елементів вздовж поперечної осі контейнера
+  transition: 0.4s
 
 .searchInput
   border: none
@@ -59,6 +68,6 @@
   padding: 0
   color: white
   font-size: 16px
-  transition: variables.$transition-speed
+  transition: 0.4s
   line-height: 25px
   width: 0px
