@@ -1,44 +1,52 @@
 <!DOCTYPE html>
-<html lang="eng"> <!--надає семантичну інформацію про мову контенту для кращої доступності, SEO та взаємодії з браузером.-->
+<html lang="eng">
 <head>
-<meta charset="UTF-8"> <!--технічно забезпечує правильне відображення символів.-->
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Loopi – your favorite place for playlists, artists, and trending music.">
+<meta name="keywords" content="music, playlists, artists, charts, Loopi, streaming">
+<meta name="author" content="Karol">
+<meta name="theme-color" content="#121212">
 <title>Loopi</title>
+<link rel="icon" href="../Photo/logo.png" type="../image/x-icon">
 <link rel="stylesheet" type="text/css" href="../Styles/style.css">
 <link rel="stylesheet" type="text/css" href="../Styles/normalize.css">
 </head>
 <body class="main_body">
-    <div class="main_header">
-        <p class="main_logo"><a href="#">Loopi</a></p>
-        <div class="searchBox">
+    <header class="main_header">
+      <nav>
+        <a href="#"><img src="../Photo/logo.png" alt="Loopi" class="main_logo" width="70px" height="70px" style="top: 0;"></a>
+        <div class="searchBox" role="search">
             <input class="searchInput" type="text" placeholder="Search">
-            <button class="searchButton">
+            <button class="searchButton" aria-label="Search button">
                 <img src="../Photo/searchbar.png" alt="Search" style="height: 10px; width: 10px;">
             </button>
         </div>
         <button class="iconUser">U</button>
         <button class="bell">
-            <img src="../Photo/bell.png" alt="Bell" style="height: 20px; width: 20px;">
+            <img src="../Photo/bell.png" alt="Bell" style="height: 20px; width: 20px;" aria-label="Open notifications">
         </button>
-    </div>
-    <div class="main">
-    	<div class="library">
-            <p class="plibrary"><b>Your library</b></p>
+      </nav>
+    </header>
+
+    <main class="main">
+    	<aside class="library" role="complementary" aria-label="User library">
+            <p class="plibrary"><strong>Your library</strong></p>
             <button class="buttonlibrary"><b>+</b></button>
-            <div class="divlibrary1">
+            <section class="divlibrary1">
                 <p><b>Create your first playlist</b></p>
                 <p>It's easy, we'll help you</p>
                 <button>Create playlist</button>
-            </div>
-            <div class="divlibrary2">
+            </section>
+            <section class="divlibrary2" aria-labelledby="browse-podcasts-title">
                 <p><b>Let's find some poscats to follow</b></p>
                 <p>We'll keep you updated on new episodes</p>
-                <button>Browse podcasts</button>
-            </div>
-        </div>
-    	<div class="recommend">
-        <div class="trendsongs">
-          <p class="precommend"><b>Trend songs</b></p>
+                <button id="browse-podcasts-title">Browse podcasts</button>
+            </section>
+        </aside>
+    	<section class="recommend" aria-label="Recommendations">
+        <section class="trendsongs" aria-labelledby="trend-title">
+          <h1 id="trend-title" class="precommend">Trend songs</h1>
           <div class="responsive">
             <div class="gallery">
               <img src="../Photo/BirdOfPray.jpg" alt="BirdOfPray">
@@ -74,9 +82,10 @@
             </div>
           </div>      
           <div class="clearfix"></div>
-        </div>
-        <div class="popularsingers">
-          <p class="precommend"><b>Popular artists</b></p>
+        </section>
+
+        <section class="popularsingers" aria-labelledby="popular-artists-title">
+          <p class="precommend" id="popular-artists-title"><b>Popular artists</b></p>
           <div class="responsive">
             <div class="gallery">
               <img src="../Photo/LadyGaga.webp" alt="LadyGaga">
@@ -112,9 +121,10 @@
             </div>
           </div>      
           <div class="clearfix"></div>
-        </div>
-        <div class="featuredcharts">
-          <p class="precommend"><b>Popular artists</b></p>
+        </section>
+
+        <section class="featuredcharts" aria-labelledby="featured-charts-title">
+          <p class="precommend" id="featured-charts-title"><b>Popular artists</b></p>
           <div class="responsive">
             <div class="gallery">
               <img src="../Photo/TopSongsGlobal.jpg" alt="TopSongsGlobal">
@@ -142,61 +152,66 @@
               <div class="desc"><p><b>Top 50 songs Ukraine</b></p></div>
             </div>
           </div>
-          </div>      
+          </section>      
           <div class="clearfix"></div>
-        </div>
-      </div>
-    <footer class="spotify-footer">
-  <div class="footer-grid">
-    <div>
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Jobs</a></li>
-        <li><a href="#">For the Record</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Communities</h4>
-      <ul>
-        <li><a href="#">For Artists</a></li>
-        <li><a href="#">Developers</a></li>
-        <li><a href="#">Advertising</a></li>
-        <li><a href="#">Investors</a></li>
-        <li><a href="#">Vendors</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Useful links</h4>
-      <ul>
-        <li><a href="#">Support</a></li>
-        <li><a href="#">Free Mobile App</a></li>
-        <li><a href="#">Popular by Country</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Spotify Plans</h4>
-      <ul>
-        <li><a href="#">Premium Individual</a></li>
-        <li><a href="#">Premium Duo</a></li>
-        <li><a href="#">Premium Family</a></li>
-        <li><a href="#">Premium Student</a></li>
-        <li><a href="#">Spotify Free</a></li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="bottom-links">
-    <div class="legal-links">
-      <span>Legal</span>
-      <span>Safety & Privacy Center</span>
-      <span>Privacy Policy</span>
-      <span>Cookies</span>
-      <span>About Ads</span>
-      <span>Accessibility</span>
-    </div>
-    <div class="copyright">© 2025 Spotify AB</div>
-  </div>
-</footer>
+        </section>
+      </main>
+
+      <footer class="spotify-footer" role="contentinfo" aria-label="Footer">
+        <section class="footer-grid">
+          <section>
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">For the Record</a></li>
+            </ul>
+          </section>
+          <section>
+            <h4>Communities</h4>
+            <ul>
+              <li><a href="#">For Artists</a></li>
+              <li><a href="#">Developers</a></li>
+              <li><a href="#">Advertising</a></li>
+              <li><a href="#">Investors</a></li>
+              <li><a href="#">Vendors</a></li>
+            </ul>
+          </section>
+          <section>
+            <h4>Useful links</h4>
+            <ul>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Free Mobile App</a></li>
+              <li><a href="#">Popular by Country</a></li>
+            </ul>
+          </section>
+          <section>
+            <h4>Spotify Plans</h4>
+            <ul>
+              <li><a href="#">Premium Individual</a></li>
+              <li><a href="#">Premium Duo</a></li>
+              <li><a href="#">Premium Family</a></li>
+              <li><a href="#">Premium Student</a></li>
+              <li><a href="#">Spotify Free</a></li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="bottom-links" >
+          <section class="legal-links" aria-label="Legal and policies">
+            <span>Legal</span>
+            <span>Safety & Privacy Center</span>
+            <span>Privacy Policy</span>
+            <span>Cookies</span>
+            <span>About Ads</span>
+            <span>Accessibility</span>
+          </section>
+          <div class="copyright">&copy; 2025 Spotify AB</div>
+        </section>
+      </footer>
+
+
+    <script src="Scripts/script.js"></script>
 </body>
 </html>
