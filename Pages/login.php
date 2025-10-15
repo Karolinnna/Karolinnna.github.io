@@ -29,7 +29,7 @@
         $password  = trim($_POST['password'] ?? '');
     }
 ?>
-    <form method="POST" action="">
+    <form method="POST" action="../index.php">
         <label for="login"></label>
         <input 
             type="text" 
