@@ -97,7 +97,7 @@
     // ------------------------------------------------------------
     if ($isAuthenticated && in_array($path, ['/login'])) {
         // header() — HTTP-редирект
-        header("Location: /home");
+        header("Location: /");
         exit;
     }
 
