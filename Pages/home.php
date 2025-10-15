@@ -7,13 +7,14 @@
     <meta name="keywords" content="music, playlists, artists, charts, Loopi, streaming">
     <meta name="author" content="Karol">
     <meta name="theme-color" content="#121212">
-    <title>Loopi</title>
+    <title>Loopi <?= htmlspecialchars($title ?? 'Сторінка', ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="icon" href="Photo/logo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="Styles/style.css">
     <link rel="stylesheet" type="text/css" href="Styles/normalize.css">
 </head>
 <body class="">
     <header class="">
+
         <nav>
             <a href="#"><img src="Photo/logo.png" alt="Loopi" class="main_logo" width="70" height="70" style="top: 0;"></a>
             <div class="searchBox" role="search">
@@ -22,7 +23,13 @@
                     <img src="Photo/searchbar.png" alt="Search" style="height: 10px; width: 10px;">
                 </button>
             </div>
-            <a href="Pages/registration.html"><button class="icon">Log in</button></a>
+            <?php if(empty($_SESSION['login'])): ?>
+              <a href="Pages/login.php"><button class="icon">Log in</button></a>
+            <?php endif; ?>
+            <?php if(!empty($_SESSION['login'])): ?>
+              <a href="?logout=1" style="position: relative; float: right;">Log out</a>
+              <button class="logind"><?php echo $_SESSION['login'][0]?></button>
+            <?php endif; ?>
             <button class="bell">
                 <img src="Photo/bell.png" alt="Bell" style="height: 20px; width: 20px;" aria-label="Open notifications">
             </button>
@@ -31,6 +38,11 @@
 
     <main class="main">
         <aside class="library" role="complementary" aria-label="User library">
+          <p>
+            <?php
+              echo "Привіт, " . ($_SESSION['login'] ?? 'КОРИСТУВАЧ НЕ АВТОРИЗОВАНИЙ');
+            ?>
+          </p>
             <h2 class="plibrary"><strong>Your library</strong></h2>
             <button class="buttonlibrary"><b>+</b></button>
             <section class="divlibrary1">
