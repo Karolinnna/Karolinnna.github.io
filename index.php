@@ -108,7 +108,7 @@
     if (array_key_exists($path, $routes)) {
 
         $title = $routes[$path]['title'] ?? 'Сторінка';
-        $file  = __DIR__ . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . $routes[$path]['file'];
+        $file  = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . $routes[$path]['file'];
 
         if (is_file($file)) {
             $currentPath = $path;     // поточний шлях
@@ -118,7 +118,7 @@
         } else {
             // Якщо файл не знайдено — помилка 500
             http_response_code(500);
-            $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . '500.php';
+            $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
             include $file500;
             exit;
         }
@@ -130,7 +130,7 @@
     http_response_code(404);
     $title = "Сторінка не знайдена";
 
-    $file404 = __DIR__ . DIRECTORY_SEPARATOR . 'pages' . DIRECTORY_SEPARATOR . '404.php';
+    $file404 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '404.php';
 
     if (is_file($file404)) {
         include $file404;
