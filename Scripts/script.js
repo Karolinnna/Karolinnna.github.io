@@ -27,12 +27,18 @@ setTimeout(() => {
 
 
 //Check email, password etc 
-const loginRegex = /^[a-zA-Z0-9_\-]{3,20}$/;
+    const login = /^[a-zA-Z0-9_\-]{3,20}$/;
     const password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    const illegalChars = /[^a-zA-Z0-9_-]/g; 
 
     const form = document.querySelector('form');
     const loginInput = document.getElementById('login');
     const passwordInput = document.getElementById('password');
+
+    loginInput.addEventListener('input', function() {
+        this.value = this.value.replace(illegalChars, '');
+    });
+
 
     form.addEventListener('submit', function(event) {
         
@@ -41,11 +47,13 @@ const loginRegex = /^[a-zA-Z0-9_\-]{3,20}$/;
 
         let validationFailed = false;
 
-        if (!loginRegex.test(loginValue)) {
+        loginInput.value = loginValue; 
+
+        if (!login.test(loginValue)) {
             validationFailed = true;
         }
 
-        if (!passwordRegex.test(passwordValue)) {
+        if (!password.test(passwordValue)) {
             validationFailed = true;
         }
 
