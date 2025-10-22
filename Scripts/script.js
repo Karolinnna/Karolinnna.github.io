@@ -24,3 +24,32 @@ setTimeout(() => {
     });
 
 }, 5000);
+
+
+//Check email, password etc 
+const loginRegex = /^[a-zA-Z0-9_\-]{3,20}$/;
+    const password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+
+    const form = document.querySelector('form');
+    const loginInput = document.getElementById('login');
+    const passwordInput = document.getElementById('password');
+
+    form.addEventListener('submit', function(event) {
+        
+        const loginValue = loginInput.value.trim();
+        const passwordValue = passwordInput.value;
+
+        let validationFailed = false;
+
+        if (!loginRegex.test(loginValue)) {
+            validationFailed = true;
+        }
+
+        if (!passwordRegex.test(passwordValue)) {
+            validationFailed = true;
+        }
+
+        if (validationFailed) {
+            event.preventDefault();
+        }
+    });
