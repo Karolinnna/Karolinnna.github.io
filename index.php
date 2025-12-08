@@ -80,7 +80,7 @@ $routes = [
 // 5) Отримуємо шлях (URI)
 // ------------------------------------------------------------
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-if ($path === null || $path === false) {
+if ($path === false) {
     $path = '/';
 }
 
