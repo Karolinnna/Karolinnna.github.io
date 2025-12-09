@@ -3,15 +3,11 @@
 // index.php — простий роутер з авторизацією та редиректами
 // ------------------------------------------------------------
 
-// ------------------------------------------------------------
-// 1) Демонстраційні облікові дані користувача
-// ------------------------------------------------------------
-$auth = [
-    "login"    => "user",
-    "password" => "123456",
-];
+require_once 'dbCreateTable.php';
 
 session_start(); // запуск сесії
+
+$basePath = "/Karolinnna.github.io"; // твоя папка у htdocs
 
 // ------------------------------------------------------------
 // Обробка виходу з облікового запису (?logout=1)
@@ -21,8 +17,8 @@ if (isset($_GET['logout'])) {
     session_destroy();
     setcookie('login', '', time() - 3600, '/');
 
-    // Після виходу — редирект на /login
-    header("Location: /login");
+    // Редирект на сторінку логіну з урахуванням папки
+    header("Location: {$basePath}/login");
     exit;
 }
 
@@ -34,51 +30,16 @@ if (isset($_SESSION['login']) || isset($_COOKIE['login'])) {
     $isAuthenticated = true;
 }
 
-
-// ------------------------------------------------------------
-// 3) Обробка POST-запиту — спроба авторизації
-// ------------------------------------------------------------
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    if (isset($_POST["login"], $_POST["password"])) {
-        $login = trim($_POST["login"]);
-        $password = trim($_POST["password"]);
-
-        // Якщо введено правильні дані
-        if ($login === $auth['login'] && $password === $auth['password']) {
-
-            // Успішна авторизація:
-            $_SESSION['login'] = $login;
-            setcookie('login', $login, time() + 10000, '/');
-
-            // Редирект на головну
-            header("Location: /");
-            exit;
-
-        } else {
-            // Невдала авторизація:
-            // 1. Записуємо помилку в сесію
-            $_SESSION['error_message'] = "User not found. (Неправильний логін або пароль.)";
-            
-            // 2. Редирект назад на сторінку авторизації (для відображення помилки)
-            header("Location: /login");
-            exit;
-        }
-    }
-}
-
-// ------------------------------------------------------------
-// 4) Таблиця маршрутів
-// ------------------------------------------------------------
-$routes = [
-    "/"          => ["title" => "ГОЛОВНА",      "file" => "home.php"],
-    "/login"     => ["title" => "АВТОРИЗАЦІЯ",  "file" => "login.php"],
-];
-
 // ------------------------------------------------------------
 // 5) Отримуємо шлях (URI)
 // ------------------------------------------------------------
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+
+// Прибираємо префікс папки, якщо сайт у піддиректорії
+if (strpos($path, $basePath) === 0) {
+    $path = substr($path, strlen($basePath));
+}
+
 if ($path === false) {
     $path = '/';
 }
@@ -89,15 +50,64 @@ if ($path === '') {
     $path = '/';
 }
 
+// ------------------------------------------------------------
+// 3) Обробка POST-запиту — спроба авторизації
+// ------------------------------------------------------------
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["login"], $_POST["password"])) {
+        $login = trim($_POST["login"]);
+        $password = trim($_POST["password"]);
+
+        try {
+            // Підключення до бази даних SQLite
+            $myPDO = new PDO('sqlite:mydatabase.db');
+            $myPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Підготовлений запит
+            $sql = "SELECT id FROM User WHERE login = :login AND password = :password";
+            $stmt = $myPDO->prepare($sql);
+
+            // Виконання з параметрами
+            $stmt->execute([
+                ':login' => $login,
+                ':password' => $password
+            ]);
+
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                $_SESSION['login'] = $login;
+                setcookie('login', $login, time() + 10000, '/');
+
+                // Редирект на головну з урахуванням папки
+                header("Location: {$basePath}/");
+                exit;
+            } else {
+                echo "користувач не існує";
+            }
+
+        } catch (PDOException $e) {
+            echo "Помилка: " . $e->getMessage();
+        }
+    }
+}
+
+// ------------------------------------------------------------
+// 4) Таблиця маршрутів
+// ------------------------------------------------------------
+$routes = [
+    "/"          => ["title" => "ГОЛОВНА",      "file" => "home.php"],
+    "/login"     => ["title" => "АВТОРИЗАЦІЯ",  "file" => "login.php"],
+    "/registration" => ["title" => "РЕЄСТРАЦІЯ", "file" => "registration.php"],
+];
 
 // ------------------------------------------------------------
 // 6) Якщо користувач авторизований — не пускаємо на /login
 // ------------------------------------------------------------
 if ($isAuthenticated && in_array($path, ['/login'])) {
-    header("Location: /");
+    header("Location: {$basePath}/");
     exit;
 }
-
 
 // ------------------------------------------------------------
 // 7) Пошук маршруту і підключення відповідного файлу
@@ -113,7 +123,6 @@ if (array_key_exists($path, $routes)) {
         include $file;
         exit;
     } else {
-        // Якщо файл сторінки не знайдено — помилка 500
         http_response_code(500);
         $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
         include $file500;

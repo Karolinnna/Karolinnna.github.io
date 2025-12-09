@@ -15,20 +15,18 @@
 <body class="reg_body">
 
     <header>
-        <a href="Pages/registration.php"><button class="icon" style="right: 50px; width: 120px">Registration</button></a>
         <a href="#"><img src="../Photo/logo.png" alt="Loopi" class="main_logo" width="70px" height="70px" style="top: 0;"></a>
     </header>
     <section>
         <h1><?= htmlspecialchars($title ?? 'Сторінка', ENT_QUOTES, 'UTF-8') ?></h1>
 <?php
-    
     // Опрацьовуємо нашу форму
     $login = '';
     $password  = '';
     // Перевіряємо, що запит дійсно POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Отримуємо значення змінних
-        $login = trim($_POST['login'] ?? '');
+        $login = trim($_POST['reg'] ?? '');
         $password  = trim($_POST['password'] ?? '');
     }
 
@@ -40,23 +38,23 @@
 
 ?>
     <form method="POST" action="../index.php">
-        <label for="login"></label>
+        <label for="registration"></label>
         <input 
             type="text" 
-            name="login" 
-            id="login" 
-            placeholder="login" 
+            name="reg" 
+            id="reg" 
+            placeholder="name" 
             required
             />
         <label for="password"></label>
         <input 
             type="password" 
-            name="password" 
-            id="password" 
+            name="password_reg" 
+            id="password_reg" 
             placeholder="password" 
             required
         />
-        <input class="btn btn-outline-light" type="submit" value="Log in">
+        <input class="btn btn-outline-light" type="submit" value="Registration">
     </form>
     <script src="Scripts/script.js"></script>
     </section>
