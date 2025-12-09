@@ -15,11 +15,9 @@
 <body class="reg_body">
 
     <header>
-        <a href="Pages/registration.php"><button class="icon" style="right: 50px; width: 120px">Registration</button></a>
         <a href="#"><img src="../Photo/logo.png" alt="Loopi" class="main_logo" width="70px" height="70px" style="top: 0;"></a>
     </header>
     <section>
-        <h1><?= htmlspecialchars($title ?? 'Сторінка', ENT_QUOTES, 'UTF-8') ?></h1>
 <?php
     
     // Опрацьовуємо нашу форму

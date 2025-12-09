@@ -16,15 +16,21 @@ try {
 
     $myPDO->exec($sql);
 
-    echo "Таблиця User створена (або вже існувала)";
+    //echo "Таблиця User створена (або вже існувала)";
 
-    // -------------------------
     // Додаємо нового користувача
-    // -------------------------
     $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('user', '123456')";
     $myPDO->exec($insert);
+    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Karol', '123456')";
+    $myPDO->exec($insert);
+    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Den', '123456')";
+    $myPDO->exec($insert);
+    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Mike', '123456')";
+    $myPDO->exec($insert);
+    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Lina', '123456')";
+    $myPDO->exec($insert);
 
-    echo "<br>Користувач доданий (або вже існував)";
+    //echo "<br>Користувач доданий (або вже існував)";
 
 } catch (PDOException $e) {
     echo "Помилка: " . $e->getMessage();

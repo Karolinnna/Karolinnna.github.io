@@ -98,7 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $routes = [
     "/"          => ["title" => "ГОЛОВНА",      "file" => "home.php"],
     "/login"     => ["title" => "АВТОРИЗАЦІЯ",  "file" => "login.php"],
-    "/registration" => ["title" => "РЕЄСТРАЦІЯ", "file" => "registration.php"],
 ];
 
 // ------------------------------------------------------------

@@ -1,5 +1,4 @@
 // 1 Task
-setTimeout(() => {
     let imagesUrl = [
         "https://t2.genius.com/unsafe/258x258/https%3A%2F%2Fimages.genius.com%2F3befd831f47fbd6b1a8e8773b9d701f1.1000x1000x1.png",
         "https://t2.genius.com/unsafe/258x258/https%3A%2F%2Fimages.genius.com%2F1c7b05c05a17035ec8c7c09cd034c087.1000x1000x1.png",
@@ -9,22 +8,12 @@ setTimeout(() => {
     ];
     
     imagesUrl.forEach((url, i) => {
-        
-        setTimeout(() => {
-            
-            let span = document.getElementById('gallery'+i);
-            
             if (span) {
                 let img = document.createElement("img");
                 img.src = url;
                 span.appendChild(img);
             }
-            
-        }, i * 1000); 
-    });
-
-}, 5000);
-
+        });
 
 //Check email, password etc 
     const login = /^[a-zA-Z0-9_\-]{3,20}$/;
