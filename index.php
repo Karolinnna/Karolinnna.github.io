@@ -7,7 +7,7 @@ require_once 'dbCreateTable.php';
 
 session_start(); // запуск сесії
 
-$basePath = "/Karolinnna.github.io"; // твоя папка у htdocs
+$basePath = "/Karolinnna.github.io";
 
 // ------------------------------------------------------------
 // Обробка виходу з облікового запису (?logout=1)
@@ -17,7 +17,6 @@ if (isset($_GET['logout'])) {
     session_destroy();
     setcookie('login', '', time() - 3600, '/');
 
-    // Редирект на сторінку логіну з урахуванням папки
     header("Location: {$basePath}/login");
     exit;
 }
@@ -79,7 +78,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['login'] = $login;
                 setcookie('login', $login, time() + 10000, '/');
 
-                // Редирект на головну з урахуванням папки
                 header("Location: {$basePath}/");
                 exit;
             } else {
