@@ -1,0 +1,25 @@
+# Composer
+/vendor/
+*.log
+/.env
+/my-php-project/vendor
+
+# Logs
+/logs/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+
