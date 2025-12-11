@@ -1,38 +1,67 @@
-<?php   
+<?php
+
+class Database
+{
+    private static $pdo;
+
+    // Підключення до SQLite
+    public static function connect()
+    {
+        self::$pdo = new PDO('sqlite:mydatabase.db');
+        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    // Перевірка користувача (авторизація)
+    public static function checkUser($login, $password)
+    {
+        $stmt = self::$pdo->query("SELECT * FROM User WHERE login = '$login' AND password = '$password'");
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Створення нового користувача (ігноруємо помилки UNIQUE)
+    public static function createUser($login, $password)
+    {
+        try {
+            self::$pdo->exec("INSERT INTO User (login, password) VALUES ('$login', '$password')");
+        } catch (PDOException $e) {
+            // Ігноруємо помилку, якщо такий логін вже існує
+        }
+    }
+
+    // Створення таблиці User
+    public static function createTable()
+    {
+        self::$pdo->exec("
+            CREATE TABLE IF NOT EXISTS User (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                login TEXT NOT NULL UNIQUE,
+                password TEXT
+            );
+        ");
+    }
+}
 
 try {
-    // Підключення до бази даних SQLite
-    $myPDO = new PDO('sqlite:mydatabase.db');
-    $myPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Підключення
+    Database::connect();
 
-    // Створення таблиці, якщо її немає
-    $sql = "
-        CREATE TABLE IF NOT EXISTS User (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            login TEXT NOT NULL UNIQUE,
-            password TEXT
-        );
-    ";
+    // Створюємо таблицю
+    Database::createTable();
 
-    $myPDO->exec($sql);
+    $newUser = ['karol', '12345'];
 
-    //echo "Таблиця User створена (або вже існувала)";
+    // Додаємо користувача
+    Database::createUser($newUser[0], $newUser[1]);
 
-    // Додаємо нового користувача
-    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('user', '123456')";
-    $myPDO->exec($insert);
-    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Karol', '123456')";
-    $myPDO->exec($insert);
-    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Den', '123456')";
-    $myPDO->exec($insert);
-    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Mike', '123456')";
-    $myPDO->exec($insert);
-    $insert = "INSERT OR IGNORE INTO User (login, password) VALUES ('Lina', '123456')";
-    $myPDO->exec($insert);
+    // Перевіряємо користувача
+    $user = Database::checkUser($newUser[0], $newUser[1]);
 
-    //echo "<br>Користувач доданий (або вже існував)";
+    if ($user) {
+        echo "Користувач авторизований!";
+    } else {
+        echo "Невірний логін або пароль!";
+    }
 
 } catch (PDOException $e) {
     echo "Помилка: " . $e->getMessage();
 }
-
