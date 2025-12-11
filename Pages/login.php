@@ -22,12 +22,12 @@
         <h1><?= htmlspecialchars($title ?? 'Сторінка', ENT_QUOTES, 'UTF-8') ?></h1>
 <?php
     
-    // Опрацьовуємо нашу форму
+    // Опрацьовуємо нашу форму з захистом від XSS
     $login = '';
     $password  = '';
     // Перевіряємо, що запит дійсно POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Отримуємо значення змінних
+        // Отримуємо значення змінних (екранування буде при виведенні в HTML)
         $login = trim($_POST['login'] ?? '');
         $password  = trim($_POST['password'] ?? '');
     }
@@ -46,6 +46,7 @@
             name="login" 
             id="login" 
             placeholder="login" 
+            value="<?= htmlspecialchars($login ?? '', ENT_QUOTES, 'UTF-8') ?>"
             required
             />
         <label for="password"></label>

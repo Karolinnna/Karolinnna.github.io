@@ -28,7 +28,7 @@
             <?php endif; ?>
             <?php if(!empty($_SESSION['login'])): ?>
               <a href="?logout=1" style="right:250px; text-align:center; padding: 7px 2px 0px 2px; color: aliceblue;" class="icon">Log out</a>
-              <button class="logind"><?php echo $_SESSION['login'][0]?></button>
+              <button class="logind"><?php echo htmlspecialchars(substr($_SESSION['login'], 0, 1), ENT_QUOTES, 'UTF-8') ?></button>
             <?php endif; ?>
             <button class="bell">
                 <img src="/Karolinnna.github.io/Photo/bell.png" alt="Bell" style="height: 20px; width: 20px;" aria-label="Open notifications">
@@ -40,7 +40,8 @@
         <aside class="library" role="complementary" aria-label="User library">
           <p>
             <?php
-              echo "Привіт, " . ($_SESSION['login'] ?? 'КОРИСТУВАЧ НЕ АВТОРИЗОВАНИЙ');
+              $userLogin = $_SESSION['login'] ?? 'КОРИСТУВАЧ НЕ АВТОРИЗОВАНИЙ';
+              echo "Привіт, " . htmlspecialchars($userLogin, ENT_QUOTES, 'UTF-8');
             ?>
           </p>
             <h2 class="plibrary"><strong>Your library</strong></h2>

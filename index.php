@@ -55,38 +55,51 @@ if ($path === '') {
 // ------------------------------------------------------------
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["login"], $_POST["password"])) {
+        // Отримуємо та очищаємо вхідні дані (для БД використовуємо raw значення, захист через prepared statements)
         $login = trim($_POST["login"]);
         $password = trim($_POST["password"]);
+        
+        // Валідація: перевіряємо, що поля не порожні
+        if (empty($login) || empty($password)) {
+            $_SESSION['error_message'] = 'Логін та пароль не можуть бути порожніми!';
+            header("Location: {$basePath}/login");
+            exit;
+        }
 
         try {
             // Підключення до бази даних SQLite
             $myPDO = new PDO('sqlite:mydatabase.db');
             $myPDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Підготовлений запит
-            $sql = "SELECT id FROM User WHERE login = :login AND password = :password";
+            // Підготовлений запит (параметризований для захисту від SQL injection)
+            $sql = "SELECT id, password FROM User WHERE login = :login";
             $stmt = $myPDO->prepare($sql);
 
             // Виконання з параметрами
             $stmt->execute([
-                ':login' => $login,
-                ':password' => $password
+                ':login' => $login
             ]);
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
+            // Перевіряємо пароль через password_verify (bcrypt)
+            if ($user && password_verify($password, $user['password'])) {
+                // Зберігаємо login у сесію (екранування буде при виведенні в шаблонах)
                 $_SESSION['login'] = $login;
                 setcookie('login', $login, time() + 10000, '/');
 
                 header("Location: {$basePath}/");
                 exit;
             } else {
-                echo "користувач не існує";
+                $_SESSION['error_message'] = 'Невірний логін або пароль!';
+                header("Location: {$basePath}/login");
+                exit;
             }
 
         } catch (PDOException $e) {
-            echo "Помилка: " . $e->getMessage();
+            $_SESSION['error_message'] = 'Помилка підключення до бази даних';
+            header("Location: {$basePath}/login");
+            exit;
         }
     }
 }

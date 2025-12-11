@@ -11,18 +11,32 @@ class Database
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // Перевірка користувача (авторизація)
+    // Перевірка користувача (авторизація) - використовує параметризовані запити
     public static function checkUser($login, $password)
     {
-        $stmt = self::$pdo->query("SELECT * FROM User WHERE login = '$login' AND password = '$password'");
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = self::$pdo->prepare("SELECT * FROM User WHERE login = :login");
+        $stmt->execute([':login' => $login]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Перевіряємо пароль через password_verify (bcrypt)
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+        return false;
     }
 
-    // Створення нового користувача (ігноруємо помилки UNIQUE)
+    // Створення нового користувача (ігноруємо помилки UNIQUE) - використовує параметризовані запити та bcrypt
     public static function createUser($login, $password)
     {
         try {
-            self::$pdo->exec("INSERT INTO User (login, password) VALUES ('$login', '$password')");
+            // Хешуємо пароль через bcrypt
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            
+            $stmt = self::$pdo->prepare("INSERT INTO User (login, password) VALUES (:login, :password)");
+            $stmt->execute([
+                ':login' => $login,
+                ':password' => $hashedPassword
+            ]);
         } catch (PDOException $e) {
             // Ігноруємо помилку, якщо такий логін вже існує
         }
@@ -50,10 +64,10 @@ try {
 
     $newUser = ['karol', '12345'];
 
-    // Додаємо користувача
+    // Додаємо користувача (пароль буде захешований через bcrypt)
     Database::createUser($newUser[0], $newUser[1]);
 
-    // Перевіряємо користувача
+    // Перевіряємо користувача (використовує password_verify для перевірки bcrypt хешу)
     $user = Database::checkUser($newUser[0], $newUser[1]);
 
     if ($user) {
