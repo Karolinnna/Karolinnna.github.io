@@ -42,14 +42,62 @@ class Database
         }
     }
 
-    // Створення таблиці User
+    // Створення всіх таблиць
     public static function createTable()
     {
+        // Таблиця користувачів
         self::$pdo->exec("
             CREATE TABLE IF NOT EXISTS User (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 login TEXT NOT NULL UNIQUE,
                 password TEXT
+            );
+        ");
+
+        // Таблиця артистів
+        self::$pdo->exec("
+            CREATE TABLE IF NOT EXISTS Artist (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                genre TEXT,
+                bio TEXT
+            );
+        ");
+
+        // Таблиця треків
+        self::$pdo->exec("
+            CREATE TABLE IF NOT EXISTS Track (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                artist_id INTEGER,
+                duration INTEGER,
+                album TEXT,
+                FOREIGN KEY (artist_id) REFERENCES Artist(id) ON DELETE CASCADE
+            );
+        ");
+
+        // Таблиця плейлистів
+        self::$pdo->exec("
+            CREATE TABLE IF NOT EXISTS Playlist (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                user_id INTEGER,
+                description TEXT,
+                created_at TEXT,
+                FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+            );
+        ");
+
+        // Таблиця зв'язку плейлистів та треків (many-to-many)
+        self::$pdo->exec("
+            CREATE TABLE IF NOT EXISTS PlaylistTrack (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                playlist_id INTEGER,
+                track_id INTEGER,
+                added_at TEXT,
+                FOREIGN KEY (playlist_id) REFERENCES Playlist(id) ON DELETE CASCADE,
+                FOREIGN KEY (track_id) REFERENCES Track(id) ON DELETE CASCADE,
+                UNIQUE(playlist_id, track_id)
             );
         ");
     }
