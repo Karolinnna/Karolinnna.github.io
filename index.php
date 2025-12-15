@@ -49,6 +49,15 @@ if ($path === '') {
     $path = '/';
 }
 
+// --- ДОБАВЛЕНО: Обробка шляху /aboutme (виклик контролера) ---
+if ($path === '/aboutme' || $path === '/aboutme/') {
+    require __DIR__ . '/controllers/AboutMeController.php';
+    $controller = new AboutMeController();
+    $controller->index();
+    exit;
+}
+// --- КІНЕЦЬ ---
+
 // ------------------------------------------------------------
 // 3) Обробка POST-запиту — спроба авторизації
 // ------------------------------------------------------------
@@ -96,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $routes = [
     "/"          => ["title" => "ГОЛОВНА",      "file" => "home.php"],
     "/login"     => ["title" => "АВТОРИЗАЦІЯ",  "file" => "login.php"],
+    "/aboutme"   => ["title" => "ABOUT ME",     "file" => "aboutme.php"],
 ];
 
 // ------------------------------------------------------------
@@ -131,7 +141,7 @@ if (array_key_exists($path, $routes)) {
 // 8) Якщо маршруту не існує — показуємо сторінку 404
 // ------------------------------------------------------------
 http_response_code(404);
-$title = "Сторінка не знайдена";
+$title = "Сторінка не знайденa";
 
 $file404 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '404.php';
 
