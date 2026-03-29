@@ -3,6 +3,11 @@
 // index.php — простий роутер з авторизацією та редиректами
 // ------------------------------------------------------------
 
+// Автозавантаження Composer (якщо встановлено)
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
 require_once 'dbCreateTable.php';
 
 session_start(); // запуск сесії
@@ -91,11 +96,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // ------------------------------------------------------------
-// 4) Таблиця маршрутів
+// 4) Таблиця маршрутів (всі через контролери)
 // ------------------------------------------------------------
 $routes = [
-    "/"          => ["title" => "ГОЛОВНА",      "file" => "home.php"],
-    "/login"     => ["title" => "АВТОРИЗАЦІЯ",  "file" => "login.php"],
+    "/"          => [
+        "controller" => "HomeController",
+        "method" => "index",
+        "template" => "home.php"
+    ],
+    "/login"     => [
+        "controller" => "LoginController",
+        "method" => "index",
+        "template" => "login.php"
+    ],
+    "/aboutme"   => [
+        "controller" => "AboutMeController",
+        "method" => "index",
+        "template" => "aboutme.php"
+    ],
 ];
 
 // ------------------------------------------------------------
@@ -111,20 +129,64 @@ if ($isAuthenticated && in_array($path, ['/login'])) {
 // ------------------------------------------------------------
 if (array_key_exists($path, $routes)) {
 
-    $title = $routes[$path]['title'] ?? 'Сторінка';
-    $file  = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . $routes[$path]['file'];
+    $routeConfig = $routes[$path];
 
-    if (is_file($file)) {
-        $currentPath = $path;
-        $GLOBALS['currentPath'] = $path;
-        include $file;
-        exit;
-    } else {
+    // Всі маршрути тепер обробляються через контролери
+    $controllerName = $routeConfig['controller'];
+    $methodName = $routeConfig['method'] ?? 'index';
+    $templateFile = $routeConfig['template'] ?? strtolower($controllerName) . '.php';
+
+    $controllerFile = __DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $controllerName . '.php';
+    $templatePath = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . $templateFile;
+
+    // Перевірка існування файлів контролера та шаблону
+    if (!is_file($controllerFile)) {
         http_response_code(500);
         $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
         include $file500;
         exit;
     }
+
+    if (!is_file($templatePath)) {
+        http_response_code(500);
+        $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
+        include $file500;
+        exit;
+    }
+
+    // Завантаження та виконання контролера
+    require_once $controllerFile;
+    $controllerClass = '\\Classes\\' . $controllerName;
+
+    if (!class_exists($controllerClass)) {
+        http_response_code(500);
+        $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
+        include $file500;
+        exit;
+    }
+
+    $controller = new $controllerClass();
+
+    if (!method_exists($controller, $methodName)) {
+        http_response_code(500);
+        $file500 = __DIR__ . DIRECTORY_SEPARATOR . 'Pages' . DIRECTORY_SEPARATOR . '500.php';
+        include $file500;
+        exit;
+    }
+
+    // Виклик методу контролера та отримання даних
+    $data = $controller->$methodName();
+
+    // Передача даних в глобальну область видимості
+    if (is_array($data)) {
+        extract($data);
+    }
+
+    // Підключення шаблону
+    $currentPath = $path;
+    $GLOBALS['currentPath'] = $path;
+    include $templatePath;
+    exit;
 }
 
 // ------------------------------------------------------------
